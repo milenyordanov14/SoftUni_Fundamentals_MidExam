@@ -1,0 +1,28 @@
+
+import java.util.Scanner;
+
+
+public class MidExam {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int firstEmployeeEfficiency = Integer.parseInt(scanner.nextLine());
+        int secondEmployeeEfficiency = Integer.parseInt(scanner.nextLine());
+        int thirdEmployeeEfficiency = Integer.parseInt(scanner.nextLine());
+        int studentsCount = Integer.parseInt(scanner.nextLine());
+        int totalEfficiency = firstEmployeeEfficiency + secondEmployeeEfficiency + thirdEmployeeEfficiency;
+        int hoursNeeded = 0;
+
+        while (studentsCount > 0) {
+            studentsCount -= totalEfficiency;
+            hoursNeeded++;
+            if (hoursNeeded % 4 == 0) {
+                hoursNeeded++;
+
+            }
+
+        }
+
+        System.out.printf("Time needed: %dh.", hoursNeeded);
+    }
+
+}
