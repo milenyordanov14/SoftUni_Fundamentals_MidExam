@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class Methods {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double monthFood = Double.parseDouble(scanner.nextLine()) * 1000;
+        double monthHay = Double.parseDouble(scanner.nextLine()) * 1000;
+        double monthCover = Double.parseDouble(scanner.nextLine()) * 1000;
+        double pigWeight = Double.parseDouble(scanner.nextLine()) * 1000;
+
+
+        for (int day = 1; day <= 30; day++) {
+            monthFood -= 300;
+            if (day % 2 == 0) {
+                monthHay = monthHay - (monthFood * 0.05);
+            }
+            if (day % 3 == 0) {
+                monthCover = monthCover - (pigWeight / 3);
+            }
+
+
+        }
+        double finalFood = monthFood / 1000;
+        double finalHay = monthHay / 1000;
+        double finalCover = monthCover / 1000;
+
+        if (monthCover <= 0 || monthFood <= 0 || monthHay <= 0) {
+            System.out.println("Merry must go to the pet store!");
+        } else {
+            System.out.printf("Everything is fine! Puppy is happy! Food: %.2f, Hay: %.2f, Cover: %.2f.", finalFood, finalHay, finalCover);
+
+        }
+
+
+    }
+}
