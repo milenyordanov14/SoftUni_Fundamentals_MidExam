@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+public class MidExam {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String command = scanner.nextLine();
+        double totalPriceWithoutTax = 0;
+
+        while (!command.equals("special") && !command.equals("regular")) {
+            double prices = Double.parseDouble(command);
+
+            if (prices < 0) {
+                System.out.println("Invalid price!");
+
+            } else {
+                totalPriceWithoutTax += prices;
+            }
+
+            command = scanner.nextLine();
+
+
+            double tax = totalPriceWithoutTax * 0.2;
+            double totalPrice = totalPriceWithoutTax + tax;
+
+            if (command.equals("regular")) {
+                if (totalPriceWithoutTax == 0) {
+                    System.out.println("Invalid order!");
+                } else {
+                    System.out.println("Congratulations you've just bought a new computer!");
+                    System.out.printf("Price without taxes: %.2f$%n", totalPriceWithoutTax);
+                    System.out.printf("Taxes: %.2f$%n", tax);
+                    System.out.println("-----------");
+                    System.out.printf("Total price: %.2f$", totalPrice);
+                }
+
+            } else if (command.equals("special")) {
+                double discount = totalPrice * 0.1;
+                totalPrice -= discount;
+                System.out.println("Congratulations you've just bought a new computer!");
+                System.out.printf("Price without taxes: %.2f$%n", totalPriceWithoutTax);
+                System.out.printf("Taxes: %.2f$%n", tax);
+                System.out.println("-----------");
+                System.out.printf("Total price: %.2f$", totalPrice);
+            }
+
+        }
+
+        if (totalPriceWithoutTax == 0) {
+            System.out.println("Invalid order!");
+        }
+
+    }
+}
