@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Methods {
+public class MidExam {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int daysOfPlunder = Integer.parseInt(scanner.nextLine());
