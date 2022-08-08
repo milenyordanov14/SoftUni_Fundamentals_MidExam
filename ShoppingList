@@ -1,0 +1,58 @@
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class MidExam {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String[] shoppingListArray = input.split("!");
+        List<String> shoppingList = Arrays.stream(shoppingListArray).collect(Collectors.toList());
+
+        String command = scanner.nextLine();
+
+        while (!command.equals("Go Shopping!")) {
+            String[] commandsArray = command.split(" ");
+            String currentCommandName = commandsArray[0];
+            String item = commandsArray[1];
+
+            switch (currentCommandName) {
+                case "Urgent":
+                    if (!shoppingList.contains(item)) {
+                        shoppingList.add(0, item);
+                    }
+                    break;
+                case "Unnecessary":
+                    if (shoppingList.contains(item)) {
+                        shoppingList.remove(item);
+                    }
+                    break;
+                case "Correct":
+
+                    String newItem = commandsArray[2];
+
+                    if (shoppingList.contains(item)) {
+                        int indexOfOldItem = shoppingList.indexOf(item);
+                        shoppingList.remove(item);
+                        shoppingList.add(indexOfOldItem, newItem);
+                    }
+
+                    break;
+                case "Rearrange":
+
+                    if (shoppingList.contains(item)) {
+
+                        shoppingList.remove(item);
+                        shoppingList.add(item);
+                    }
+                    break;
+            }
+
+
+            command = scanner.nextLine();
+        }
+        System.out.println(String.join(", ", shoppingList));
+    }
+}
