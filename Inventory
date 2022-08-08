@@ -1,0 +1,59 @@
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class MidExam {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String inventory = scanner.nextLine();
+        String[] splitInventory = inventory.split(", ");
+        List<String> inventoryContent = Arrays.stream(splitInventory).collect(Collectors.toList());
+
+        String command = scanner.nextLine();
+
+        while (!command.equals("Craft!")) {
+            String[] commandsArray = command.split(" - ");
+            String currentCommandName = commandsArray[0];
+            String item = commandsArray[1];
+
+            switch (currentCommandName) {
+                case "Collect":
+                    for (int i = 1; i < commandsArray.length; i++) {
+                        if (!inventoryContent.contains(commandsArray[i])) {
+                            inventoryContent.add(commandsArray[i]);
+                        }
+                    }
+                    break;
+                case "Drop":
+                    if (inventoryContent.contains(item)) {
+                        inventoryContent.remove(item);
+                    }
+                    break;
+                case "Combine Items":
+                    String[] split = item.split(":");
+                    String oldItem = split[0];
+                    String newItem = split[1];
+                    int index = inventoryContent.indexOf(oldItem);
+                    if (inventoryContent.contains(oldItem)) {
+                        inventoryContent.add(index+1, newItem);
+                    }
+
+                    break;
+                case "Renew":
+
+                    if (inventoryContent.contains(item)) {
+                        inventoryContent.remove(item);
+                        inventoryContent.add(item);
+                    }
+                    break;
+            }
+
+
+            command = scanner.nextLine();
+        }
+        System.out.println(String.join(", ", inventoryContent));
+    }
+}
