@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class MidExam {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] room = scanner.nextLine().split("\\|");
+        int initialHealth = 100;
+        int initialCoin = 0;
+        boolean hasDied = false;
+
+        for (int i = 0; i < room.length; i++) {
+            String[] currentRoom = room[i].split(" ");
+            String command = currentRoom[0];
+            int points = Integer.parseInt(currentRoom[1]);
+
+            if (command.contains("potion")) {
+                int healthPotionsNeeded = 100 - initialHealth;
+                initialHealth += points;
+                if (initialHealth > 100) {
+                    initialHealth = 100;
+                }
+                if (healthPotionsNeeded <= points) {
+                    System.out.printf("You healed for %d hp.%n", healthPotionsNeeded);
+                } else {
+                    System.out.printf("You healed for %d hp.%n", points);
+                }
+                System.out.printf("Current health: %d hp.%n", initialHealth);
+            }else if (command.contains("chest")){
+                initialCoin += points;
+                System.out.printf("You found %d bitcoins.%n", points);
+            } else {
+                initialHealth -= points;
+                if(initialHealth > 0){
+                    System.out.printf("You slayed %s.%n", command);
+                } else {
+                    hasDied = true;
+                    System.out.printf("You died! Killed by %s.%n", command);
+                    System.out.printf("Best room: %d%n", i+1);
+                    break;
+                }
+            }
+        }
+        if(!hasDied){
+            System.out.printf("You've made it!%n" + "Bitcoins: %d%n" + "Health: %d%n", initialCoin, initialHealth);
+        }
+    }
+}
